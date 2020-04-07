@@ -4,10 +4,9 @@ import 'package:smart_parking/setup/register.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_parking/setup/login.dart';
 
-
- void main(){
-   runApp(MyApp());
- }
+void main() {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -18,13 +17,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-
-      routes:<String, WidgetBuilder>{
-
-        '/homePage':(BuildContext context) => Home(),
+      routes: <String, WidgetBuilder>{
+        '/homePage': (BuildContext context) => Home(),
       },
       home: Register(),
     );
   }
 }
-

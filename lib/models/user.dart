@@ -7,14 +7,14 @@ class User{
   final String vehicle;
 
 
-  User(
+  User({
     this.userid,
     this.username,
     this.email,
     this.password,
     this.mobile,
     this.vehicle
-  );
+  });
 
   Map<String, dynamic> toMap() {
     return{

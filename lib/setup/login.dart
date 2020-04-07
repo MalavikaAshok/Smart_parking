@@ -10,14 +10,14 @@ class Login extends StatefulWidget {
 }
 
 class _LoginPageState extends State<Login> {
-  String _email,_password;
+  String _email, _password;
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Form(
-          key: _formkey,
-          child: Stack(
+      body: Form(
+        key: _formkey,
+        child: Stack(
           fit: StackFit.expand,
           children: <Widget>[
             Image.asset(
@@ -26,20 +26,14 @@ class _LoginPageState extends State<Login> {
               color: Colors.black54,
               colorBlendMode: BlendMode.darken,
             ),
-            
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Image.asset(
-                  'assets/images/traffic.png',
-                  height: 100.0,
-                  width:100.0
-                  
-                  ),
-
-                 Padding(
-                   padding:EdgeInsets.only(top:30.0),
-                   child: Container(
+                Image.asset('assets/images/traffic.png',
+                    height: 100.0, width: 100.0),
+                Padding(
+                  padding: EdgeInsets.only(top: 30.0),
+                  child: Container(
                     height: 300.0,
                     width: 320.0,
                     padding: EdgeInsets.symmetric(
@@ -52,126 +46,113 @@ class _LoginPageState extends State<Login> {
                       borderRadius: BorderRadius.circular(20.0),
                     ),
                     child: Column(
-                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                                                
-                      Container(
-                          margin: EdgeInsets.only(bottom: 10),
-                          child: TextFormField(
-                          autocorrect: false,
-                          autofocus: false,
-                          style: TextStyle(
-                            fontSize:20.0,
-                          ),
-                          decoration: InputDecoration(
-                            hintText: 'email',
-                            border: InputBorder.none,
-                            filled: true,
-                            fillColor: Colors.grey[200],
-                            contentPadding: EdgeInsets.all(15.0)
-                          ),
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return 'Please fill the email';
-                            }
-                            return null;
-                          },
-                          onSaved: (value) {
-                            _email = value;
-                          },
-                        ),
-                      ),
-
-                      Container(
-                          margin: EdgeInsets.only(top:10),
-                          child: TextFormField(
-                          autocorrect: false,
-                          autofocus: false,
-                          style: TextStyle(
-                            fontSize:20.0,
-                          ),
-                          decoration: InputDecoration(
-                            hintText: 'password',
-                            border: InputBorder.none,
-                            filled: true,
-                            fillColor: Colors.grey[200],
-                            contentPadding: EdgeInsets.all(15.0)
-                          ),
-                          validator: (value) {
-                            if (value.length < 6) {
-                              return 'password must be alieast 6 characters';
-                            }
-                            return null;
-                          },
-                          onSaved: (value) {
-                            _password = value;
-                          },
-                        ),
-                      ),
-
-                      
-                      Container(
-                      width: 350,
-                      margin: EdgeInsets.only(top: 10),
-                      child: RaisedButton(
-                        onPressed: logIn,
-                        color: Colors.red[400],
-                        child: Text(
-                          'Login',
-                          style: TextStyle(
-                            color: Colors.white,
-                            ),
-                        ),
-                      ),
-                      ),
-
-
-                      Container(
-                      
-                      margin: EdgeInsets.only(top:10),
-                      child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                      Text(
-                        'Create a new Account?',
-                      ),
-                      FlatButton(
-                        child: Text(
-                          'Register',
-                          style: TextStyle(fontSize: 15),
+                        Container(
+                          margin: EdgeInsets.only(bottom: 10),
+                          child: TextFormField(
+                            autocorrect: false,
+                            autofocus: false,
+                            style: TextStyle(
+                              fontSize: 20.0,
+                            ),
+                            decoration: InputDecoration(
+                                hintText: 'email',
+                                border: InputBorder.none,
+                                filled: true,
+                                fillColor: Colors.grey[200],
+                                contentPadding: EdgeInsets.all(15.0)),
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return 'Please fill the email';
+                              }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              _email = value;
+                            },
+                          ),
                         ),
-                        onPressed: () {},
-                        textColor: Colors.blue,
-                      )
-                    ],
-                  ),
-                 ),
-
-
-
-                    ],
+                        Container(
+                          margin: EdgeInsets.only(top: 10),
+                          child: TextFormField(
+                            autocorrect: false,
+                            autofocus: false,
+                            style: TextStyle(
+                              fontSize: 20.0,
+                            ),
+                            decoration: InputDecoration(
+                                hintText: 'password',
+                                border: InputBorder.none,
+                                filled: true,
+                                fillColor: Colors.grey[200],
+                                contentPadding: EdgeInsets.all(15.0)),
+                            validator: (value) {
+                              if (value.length < 6) {
+                                return 'password must be alieast 6 characters';
+                              }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              _password = value;
+                            },
+                          ),
+                        ),
+                        Container(
+                          width: 350,
+                          margin: EdgeInsets.only(top: 10),
+                          child: RaisedButton(
+                            onPressed: logIn,
+                            color: Colors.red[400],
+                            child: Text(
+                              'Login',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                'Create a new Account?',
+                              ),
+                              FlatButton(
+                                child: Text(
+                                  'Register',
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                                onPressed: () {},
+                                textColor: Colors.blue,
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-                 ),
-                
               ],
-
             ),
           ],
-          
         ),
-       ),
+      ),
     );
   }
 
-Future<void> logIn() async{
+  Future<void> logIn() async {
     final formState = _formkey.currentState;
-    if(formState.validate()){
+    if (formState.validate()) {
       formState.save();
-      try{
-        FirebaseUser user = (await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _password)).user;
+      try {
+        FirebaseUser user = (await FirebaseAuth.instance
+                .signInWithEmailAndPassword(email: _email, password: _password))
+            .user;
         Navigator.of(context).pushNamed('/homePage');
-      }catch(e){
+      } catch (e) {
         print(e.message);
       }
     }
