@@ -1,5 +1,8 @@
 import 'package:smart_parking/setup/signin.dart';
+import 'package:smart_parking/pages/home.dart';
+import 'package:smart_parking/setup/register.dart';
 import 'package:flutter/material.dart';
+import 'package:smart_parking/setup/login.dart';
 
 
  void main(){
@@ -15,7 +18,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      home: SigninPage(),
+
+      routes:<String, WidgetBuilder>{
+
+        '/homePage':(BuildContext context) => Home(),
+      },
+      home: Register(),
     );
   }
 }
