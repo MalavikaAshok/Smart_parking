@@ -13,16 +13,16 @@ class Profile2 extends StatefulWidget {
 
 class _ProfileState extends State<Profile2> {
 
-  String _Email;
+  String _email = 'mail';
   
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   Future<String> _getUserEmail() async {
     FirebaseUser user = await firebaseAuth.currentUser();
     setState(() {
-      _Email = user.email;
+      _email = user.email;
     });
-    return this._Email;
+    return this._email;
   }
   
 
@@ -33,7 +33,7 @@ class _ProfileState extends State<Profile2> {
         children: <Widget>[
           Stack(
             children: <Widget>[
-              displayUser(context, this._Email),
+              displayUser(context, this._email),
             ],
           ),
         ]
