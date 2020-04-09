@@ -21,7 +21,15 @@ Future createUser(User user) async{
   }
 }
 
-Future<String> getCurrentUID() async{
-  return (await firebaseAuth.currentUser()).uid;
+
+Future getUsername(String uid) async {
+  try{
+    var userData = await _usersCollectionReference.document(uid).get();
+    return User.fromMap(userData.data).username;
+
+  }catch(e){
+    return e.message;
+
+  }
 }
 }

@@ -25,20 +25,24 @@ class _ProfileState extends State<Profile2> {
     return this._email;
   }
 
- // Future<String> _getUserName() async {
+Future<String> getCurrentUID() async{
+  String userid = (await firebaseAuth.currentUser()).uid;
+  return userid;
+}
 
-  //}
   
 
   @override
   Widget build(BuildContext context) {
     _getUserEmail();
+    getCurrentUID();
+    FirestoreService().getUsername(userid);
     return Scaffold(
       body: Column(
         children: <Widget>[
           Stack(
             children: <Widget>[
-              displayUser(context, this._email),
+              displayUser(context, this._email,User.fromMap(userData.data).username),
             ],
           ),
         ]
@@ -48,11 +52,18 @@ class _ProfileState extends State<Profile2> {
       }
 
 
-Widget displayUser(context, String email){
+Widget displayUser(context, String email, String username){
   
   return Column(
     children: <Widget>[
       
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          username,
+        ) ,
+         ),
+
 
 
       Padding(
