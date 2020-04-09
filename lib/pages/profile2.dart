@@ -24,10 +24,15 @@ class _ProfileState extends State<Profile2> {
     });
     return this._email;
   }
+
+ // Future<String> _getUserName() async {
+
+  //}
   
 
   @override
   Widget build(BuildContext context) {
+    _getUserEmail();
     return Scaffold(
       body: Column(
         children: <Widget>[
