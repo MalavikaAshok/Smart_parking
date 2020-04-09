@@ -6,35 +6,53 @@ import 'package:smart_parking/setup/userdata.dart';
 import 'package:smart_parking/setup/login.dart';
 
 class Profile extends StatefulWidget {
-  String _Email;
-
-  Future<String> _getUserEmail() async {
-    FirebaseUser user = await FirebaseAuth.instance.currentUser();
-    
-      _Email = user.email;
-
-    return _Email;
-  }
-
-
-
   @override
   _ProfileState createState() => _ProfileState();
 }
 
 
 class _ProfileState extends State<Profile> {
-  @override
+  String _email = 'mail';
+FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+
+  Future<String> _getUserEmail() async {
+    FirebaseUser user = await firebaseAuth.currentUser();
+    setState(() {
+      _email = user.email;
+    });
+    return this._email;
+  }
+
   Widget build(BuildContext context) {
+    _getUserEmail();
+    //getCurrentUID();
     return Scaffold(
-      body: Stack(
+      resizeToAvoidBottomPadding: false,
+      body: Column(
+        children: <Widget>[
+          Stack(
+            children: <Widget>[
+              displayUser(context, this._email),
+            ],
+          ),
+        ]
+
+      ),
+    );
+ }
+
+}
+
+  Widget displayUser(context, String email,) {
+    return Container(
+      child: Stack(
         children: <Widget>[
           ClipPath(
             child:Container(
               color: Colors.black.withOpacity(0.8),
             ),
-            clipper: getClipper(),
-          ),
+             clipper: getClipper(),
+           ),
           
           Positioned(
             width: 350.0, 
@@ -46,10 +64,10 @@ class _ProfileState extends State<Profile> {
                   height: 150.0,
                   decoration: BoxDecoration(
                     color: Colors.red,
-                    image:DecorationImage(
-                      image: NetworkImage(''),
-                      fit: BoxFit.cover,
-                      ),
+                    // image:DecorationImage(
+                    //   image: NetworkImage(''),
+                    //   fit: BoxFit.cover,
+                    //   ),
                     borderRadius: BorderRadius.all(Radius.circular(75.0)),
                     boxShadow: [BoxShadow(blurRadius:7.0, color:Colors.black)]
                   ),
@@ -65,8 +83,8 @@ class _ProfileState extends State<Profile> {
 
                 SizedBox(height: 10.0,),
                 Text(
-                 // _Email,
-                 'qwds',
+                 email,
+                 
                   style: TextStyle(
                     fontSize: 20.0,
                     fontStyle: FontStyle.italic,
@@ -126,14 +144,14 @@ class _ProfileState extends State<Profile> {
                 
               ],
             ),
-          ),
+           ),
         ],
       ),
 
       
     );
   }
-}
+
 
 class getClipper extends CustomClipper<Path>{
   @override

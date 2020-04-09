@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+//import 'package:flutter/rendering.dart';
 import 'package:smart_parking/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:smart_parking/setup/userdata.dart';
@@ -14,7 +14,7 @@ class Profile2 extends StatefulWidget {
 class _ProfileState extends State<Profile2> {
 
   String _email = 'mail';
-  String _userid = '';
+  String _userid = 'username';
   User _userData;
   
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
@@ -32,10 +32,10 @@ Future<String> getCurrentUID() async {
   setState(() {
     this._userid = userid;
   });
-  
-  setState(() async {
   this._userData = await FirestoreService().getUsername(this._userid);
-  });
+  
+  setState(() {
+    });
 }
 
   
@@ -56,9 +56,9 @@ Future<String> getCurrentUID() async {
 
       ),
     );
-      }
+ }
 
-
+}
 Widget displayUser(context, String email, String username){
   
   return Column(
@@ -84,4 +84,3 @@ Widget displayUser(context, String email, String username){
   );
 }
 
-}

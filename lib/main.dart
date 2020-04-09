@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         '/homePage': (BuildContext context) => Home(),
         '/loginPage':(BuildContext context) => Login(),
-        '/ProfilePage':(BuildContext context)=> Profile2(),
+        '/ProfilePage':(BuildContext context)=> Profile(),
       },
       home: Login(),
     );
