@@ -3,7 +3,6 @@ import 'package:flutter/rendering.dart';
 import 'package:smart_parking/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:smart_parking/setup/userdata.dart';
-import 'package:smart_parking/setup/login.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -12,6 +11,9 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   String _email = 'mail';
+  String _userid = 'username';
+  User _userData;
+  
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   @override
@@ -28,19 +30,30 @@ class _ProfileState extends State<Profile> {
     return this._email;
   }
 
+  Future<String> getCurrentUID() async {
+  String userid = (await firebaseAuth.currentUser()).uid;
+  setState(() {
+    this._userid = userid;
+  });
+  this._userData = await FirestoreService().getUsername(this._userid);
+  
+  setState(() {
+    });
+}
+
   Widget build(BuildContext context) {
-    //getCurrentUID();
+    getCurrentUID();
     return Scaffold(
       // resizeToAvoidBottomPadding: false,
       appBar: AppBar(
-        title: Text('profile page'),
+        title: Text('profile'),
       ),
-      body: displayUser(context, this._email),
+      body: displayUser(context, this._email,this._userData.username),
     );
   }
 }
 
-Widget displayUser(context, String email) {
+Widget displayUser(context, String email,String username) {
   return Container(
     child: Stack(
       children: <Widget>[
@@ -50,7 +63,6 @@ Widget displayUser(context, String email) {
           ),
           clipper: GetClipper(),
         ),
-        Text('hello'),
         Positioned(
           width: 350.0,
           top: MediaQuery.of(context).size.height / 5,
@@ -74,7 +86,7 @@ Widget displayUser(context, String email) {
                 height: 40.0,
               ),
               Text(
-                'malavika',
+                username,
                 style: TextStyle(
                   fontSize: 30.0,
                   fontWeight: FontWeight.bold,
