@@ -33,9 +33,8 @@ Future<String> getCurrentUID() async {
     this._userid = userid;
   });
   
+  setState(() async {
   this._userData = await FirestoreService().getUsername(this._userid);
-  setState(() {
-    
   });
 }
 
