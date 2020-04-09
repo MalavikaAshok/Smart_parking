@@ -22,10 +22,10 @@ Future createUser(User user) async{
 }
 
 
-Future getUsername(String uid) async {
+Future<User> getUsername(String uid) async {
   try{
     var userData = await _usersCollectionReference.document(uid).get();
-    return User.fromMap(userData.data).username;
+    return User.fromMap(userData.data);
 
   }catch(e){
     return e.message;

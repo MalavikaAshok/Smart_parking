@@ -14,6 +14,8 @@ class Profile2 extends StatefulWidget {
 class _ProfileState extends State<Profile2> {
 
   String _email = 'mail';
+  String _userid = '';
+  User _userData;
   
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
@@ -25,9 +27,16 @@ class _ProfileState extends State<Profile2> {
     return this._email;
   }
 
-Future<String> getCurrentUID() async{
+Future<String> getCurrentUID() async {
   String userid = (await firebaseAuth.currentUser()).uid;
-  return userid;
+  setState(() {
+    this._userid = userid;
+  });
+  
+  this._userData = await FirestoreService().getUsername(this._userid);
+  setState(() {
+    
+  });
 }
 
   
@@ -36,13 +45,12 @@ Future<String> getCurrentUID() async{
   Widget build(BuildContext context) {
     _getUserEmail();
     getCurrentUID();
-    FirestoreService().getUsername(userid);
     return Scaffold(
       body: Column(
         children: <Widget>[
           Stack(
             children: <Widget>[
-              displayUser(context, this._email,User.fromMap(userData.data).username),
+              displayUser(context, this._email,this._userData.username),
             ],
           ),
         ]
