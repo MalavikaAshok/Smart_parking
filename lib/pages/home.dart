@@ -12,6 +12,20 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: Text('Home'),
       ),
+      body:Container(
+        child:RaisedButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed('/ProfilePage');
+              },
+              color: Colors.red[400],
+              child: Text(
+                'Profile',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            ),
+      ),
     );
   }
 }

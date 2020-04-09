@@ -1,3 +1,5 @@
+import 'package:smart_parking/pages/profile.dart';
+import 'package:smart_parking/pages/profile2.dart';
 import 'package:smart_parking/setup/signin.dart';
 import 'package:smart_parking/pages/home.dart';
 import 'package:smart_parking/setup/register.dart';
@@ -20,8 +22,9 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         '/homePage': (BuildContext context) => Home(),
         '/loginPage':(BuildContext context) => Login(),
+        '/ProfilePage':(BuildContext context)=> Profile2(),
       },
-      home: Register(),
+      home: Login(),
     );
   }
 }

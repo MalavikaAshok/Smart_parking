@@ -192,6 +192,7 @@ class _RegisterPageState extends State<Register> {
                         child: RaisedButton(
                           onPressed: () {
                             _validateAndSubmit();
+                            Navigator.of(context).pushNamed('/homePage');
                           },
                           color: Colors.red[400],
                           child: Text(
@@ -236,7 +237,6 @@ class _RegisterPageState extends State<Register> {
     final FormState form = _formkey.currentState;
     if (form.validate()) {
       form.save();
-      // print('firstname: $_firstName, lastname: $_lastName, gender: $_gender, email: $_email,dob: $_dob,password: $_password');
       return true;
     }
     return false;
@@ -281,7 +281,7 @@ class _RegisterPageState extends State<Register> {
     //debugPrint('created user to firestore');
     //DocumentSnapshot userDoc = await userRef.get();
 
-    Navigator.of(context)
-        .pushNamedAndRemoveUntil('/loginPage', (Route<dynamic> route) => false);
+    //Navigator.of(context)
+      //  .pushNamedAndRemoveUntil('/HomePage', (Route<dynamic> route) => false);
   }
 }
