@@ -10,10 +10,15 @@ class Profile extends StatefulWidget {
   _ProfileState createState() => _ProfileState();
 }
 
-
 class _ProfileState extends State<Profile> {
   String _email = 'mail';
-FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+
+  @override
+  void initState() {
+    super.initState();
+    _getUserEmail();
+  }
 
   Future<String> _getUserEmail() async {
     FirebaseUser user = await firebaseAuth.currentUser();
@@ -24,149 +29,131 @@ FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   }
 
   Widget build(BuildContext context) {
-    _getUserEmail();
     //getCurrentUID();
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
-      body: Column(
-        children: <Widget>[
-          Stack(
-            children: <Widget>[
-              displayUser(context, this._email),
-            ],
-          ),
-        ]
-
+      // resizeToAvoidBottomPadding: false,
+      appBar: AppBar(
+        title: Text('profile page'),
       ),
+      body: displayUser(context, this._email),
     );
- }
-
+  }
 }
 
-  Widget displayUser(context, String email,) {
-    return Container(
-      child: Stack(
-        children: <Widget>[
-          ClipPath(
-            child:Container(
-              color: Colors.black.withOpacity(0.8),
-            ),
-             clipper: getClipper(),
-           ),
-          
-          Positioned(
-            width: 350.0, 
-            top: MediaQuery.of(context).size.height/5,
-            child: Column(
-              children: <Widget>[
-                Container(
-                  width: 150.0,
-                  height: 150.0,
-                  decoration: BoxDecoration(
+Widget displayUser(context, String email) {
+  return Container(
+    child: Stack(
+      children: <Widget>[
+        ClipPath(
+          child: Container(
+            color: Colors.black.withOpacity(0.8),
+          ),
+          clipper: GetClipper(),
+        ),
+        Text('hello'),
+        Positioned(
+          width: 350.0,
+          top: MediaQuery.of(context).size.height / 5,
+          child: Column(
+            children: <Widget>[
+              Container(
+                width: 150.0,
+                height: 150.0,
+                decoration: BoxDecoration(
                     color: Colors.red,
                     // image:DecorationImage(
                     //   image: NetworkImage(''),
                     //   fit: BoxFit.cover,
                     //   ),
                     borderRadius: BorderRadius.all(Radius.circular(75.0)),
-                    boxShadow: [BoxShadow(blurRadius:7.0, color:Colors.black)]
-                  ),
+                    boxShadow: [
+                      BoxShadow(blurRadius: 7.0, color: Colors.black)
+                    ]),
+              ),
+              SizedBox(
+                height: 40.0,
+              ),
+              Text(
+                'malavika',
+                style: TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.bold,
                 ),
-                SizedBox(height: 40.0,),
-                Text(
-                  'malavika',
-                  style: TextStyle(
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.bold,
-                  ),
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              Text(
+                email,
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontStyle: FontStyle.italic,
                 ),
-
-                SizedBox(height: 10.0,),
-                Text(
-                 email,
-                 
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    fontStyle: FontStyle.italic,
-                  ),
-                ),
-
-                SizedBox(height: 40.0),
-                Container(
-                  height: 40.0,
-                  width: 95.0,
-                  child: Material(
-                    borderRadius: BorderRadius.circular(20.0),
-                    shadowColor: Colors.greenAccent,
-                    color: Colors.green,
-                    elevation: 7.0,
-                    child: GestureDetector(
-                      onTap:(){},
-                        child: Center(
-                          child: Text(
-                            'Edit Profile',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 17.0
-                              ),
-                          ),
-                        ),
+              ),
+              SizedBox(height: 40.0),
+              Container(
+                height: 40.0,
+                width: 95.0,
+                child: Material(
+                  borderRadius: BorderRadius.circular(20.0),
+                  shadowColor: Colors.greenAccent,
+                  color: Colors.green,
+                  elevation: 7.0,
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: Center(
+                      child: Text(
+                        'Edit Profile',
+                        style: TextStyle(color: Colors.white, fontSize: 17.0),
+                      ),
                     ),
                   ),
                 ),
-
-
-                SizedBox(height: 15.0),
-                Container(
-                  height: 40.0,
-                  width: 95.0,
-                  child: Material(
-                    borderRadius: BorderRadius.circular(20.0),
-                    shadowColor: Colors.redAccent,
-                    color: Colors.red,
-                    elevation: 7.0,
-                    child: GestureDetector(
-                      onTap:(){},
-                        child: Center(
-                          child: Text(
-                            'Logout',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 17.0,
-                              ),
-                          ),
+              ),
+              SizedBox(height: 15.0),
+              Container(
+                height: 40.0,
+                width: 95.0,
+                child: Material(
+                  borderRadius: BorderRadius.circular(20.0),
+                  shadowColor: Colors.redAccent,
+                  color: Colors.red,
+                  elevation: 7.0,
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: Center(
+                      child: Text(
+                        'Logout',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 17.0,
                         ),
+                      ),
                     ),
                   ),
                 ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
+}
 
-                
-                
-              ],
-            ),
-           ),
-        ],
-      ),
-
-      
-    );
-  }
-
-
-class getClipper extends CustomClipper<Path>{
+class GetClipper extends CustomClipper<Path> {
   @override
-  Path getClip(Size size){
+  Path getClip(Size size) {
     var path = new Path();
 
-    path.lineTo(0.0, size.height/2.2);
-    path.lineTo(size.width+300,0.0);
+    path.lineTo(0.0, size.height / 2.2);
+    path.lineTo(size.width + 300, 0.0);
     path.close();
     return path;
   }
 
-  @override 
-  bool shouldReclip(CustomClipper<Path> oldClipper){
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
     return true;
   }
 }
-

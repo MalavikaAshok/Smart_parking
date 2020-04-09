@@ -126,7 +126,9 @@ class _LoginPageState extends State<Login> {
                                   'Register',
                                   style: TextStyle(fontSize: 15),
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.of(context).pushReplacementNamed('/registerPage');
+                                },
                                 textColor: Colors.blue,
                               )
                             ],
